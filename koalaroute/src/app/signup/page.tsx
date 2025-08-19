@@ -32,32 +32,36 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="max-w-sm mx-auto mt-10">
-      <h2 className="text-2xl font-bold">Sign Up</h2>
-      <form onSubmit={handleSignup} className="mt-4 space-y-3">
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="border p-2 w-full rounded"
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="border p-2 w-full rounded"
-          required
-        />
-        <button
-          type="submit"
-          className="bg-green-600 text-white px-4 py-2 rounded w-full"
-        >
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
+      <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
+        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
           Sign Up
-        </button>
-      </form>
+        </h2>
+        <form onSubmit={handleSignup} className="space-y-4">
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+            required
+          />
+          <button
+            type="submit"
+            className="w-full bg-green-600 text-white py-3 rounded-md hover:bg-green-700 transition-colors"
+          >
+            Sign Up
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

@@ -22,6 +22,7 @@ export default function LoginPage() {
       if (res.ok) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("userEmail", data.user.email);
         router.push("/koalaroute");
       } else {
         alert(data.msg || "Login failed");
@@ -33,32 +34,36 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="max-w-sm mx-auto mt-10">
-      <h2 className="text-2xl font-bold">Login</h2>
-      <form onSubmit={handleLogin} className="mt-4 space-y-3">
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="border p-2 w-full rounded"
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="border p-2 w-full rounded"
-          required
-        />
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded w-full"
-        >
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
+      <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
+        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
           Login
-        </button>
-      </form>
+        </h2>
+        <form onSubmit={handleLogin} className="space-y-4">
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+            required
+          />
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition-colors"
+          >
+            Login
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
