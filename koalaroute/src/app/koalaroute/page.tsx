@@ -32,7 +32,8 @@ export default function KoalaRoutePage() {
         }
         return res.json();
       })
-      .then((data) => setData(data));
+      .then((data) => setData(data))
+      .catch((err) => console.error("Fetch error:", err));
   }, [router]);
 
   return (

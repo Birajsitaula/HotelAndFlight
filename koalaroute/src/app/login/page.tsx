@@ -11,19 +11,24 @@ export default function LoginPage() {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const res = await fetch("http://localhost:5000/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-    const data = await res.json();
-    if (res.ok) {
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("isLoggedIn", "true");
-      router.push("/koalaroute");
-    } else {
-      alert(data.msg);
+      const data = await res.json();
+      if (res.ok) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("isLoggedIn", "true");
+        router.push("/koalaroute");
+      } else {
+        alert(data.msg || "Login failed");
+      }
+    } catch (err) {
+      console.error("Fetch error:", err);
+      alert("Failed to connect to backend.");
     }
   };
 

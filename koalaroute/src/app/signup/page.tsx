@@ -1,25 +1,33 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function SignupPage() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const router = useRouter();
 
   const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const res = await fetch("http://localhost:5000/api/auth/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-    const data = await res.json();
-    if (res.ok) {
-      alert("✅ Account created! Please login.");
-    } else {
-      alert(data.msg);
+      const data = await res.json();
+      if (res.ok) {
+        alert("✅ Account created! Please login.");
+        router.push("/login");
+      } else {
+        alert(data.msg || "Signup failed");
+      }
+    } catch (err) {
+      console.error("Fetch error:", err);
+      alert("Failed to connect to backend.");
     }
   };
 
