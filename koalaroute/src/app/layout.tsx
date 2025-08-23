@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import "./globals.css";
+import Footer from "./components/Footer"; // <-- import your Footer component
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -16,7 +17,6 @@ export default function RootLayout({
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const router = useRouter();
 
-  // Only run on client
   useEffect(() => {
     const loggedIn = localStorage.getItem("isLoggedIn") === "true";
     const email = localStorage.getItem("userEmail");
@@ -83,9 +83,10 @@ export default function RootLayout({
             )}
           </nav>
         </header>
-
         {/* Main content */}
         <main className="flex-1 p-4 md:p-6">{children}</main>
+        {/* Footer */}
+        <Footer /> {/* <-- Render Footer here */}
       </body>
     </html>
   );
